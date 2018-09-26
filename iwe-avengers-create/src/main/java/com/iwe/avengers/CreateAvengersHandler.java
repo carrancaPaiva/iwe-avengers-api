@@ -9,25 +9,23 @@ import com.iwe.avengers.dao.AvengerDAO;
 public class CreateAvengersHandler implements RequestHandler<Avenger, HandlerResponse> {
 
 	private AvengerDAO dao = new AvengerDAO();
-	
-	
-	@Override
-	public HandlerResponse handleRequest(final Avenger newAvenger, final Context context) {
 
-		context.getLogger().log("[#] - Create Avanger: ");
+	@Override
+	public HandlerResponse handleRequest(final Avenger newAvenger, 
+			final Context context) {
+
+		context.getLogger().log("[#] - Creating Avenger");
+
+		final Avenger createdAvenger = dao.save(newAvenger);
+
+		final HandlerResponse response = 
+				HandlerResponse.builder()
+				.setObjectBody(createdAvenger)
+				.build();
+
+		context.getLogger().log("[#] - Created Avenger");
 		
-		Avenger createAvenger = null;
-		
-		if (dao.search(newAvenger.getId()) != null) {
-			
-		}
-		
-		
-		
-		
-		
-		
-		return null;
+		return response;
 
 	}
 }
